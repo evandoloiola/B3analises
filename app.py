@@ -4,21 +4,10 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objects as go
-#mysql
-import pymysql
-#data viz
-import pandas as pd
-
-#conexao mysql 
-conn = pymysql.connect(
-    host='185.201.10.16',
-    user='webizyco_finantial',
-    password='#Atualidade#13',
-    db='webizyco_finantial')
-
-#query
-df = pd.read_sql("SELECT `Fundo`,`Data`,`Variação` FROM `fundos` WHERE `Fundo` LIKE '%Equitas%'",conn)
-
+from DatabaseConnect import Database as Dt
+#connect to data base
+data = Dt()
+df = data.read_sql("SELECT `Fundo`,`Data`,`Variação` FROM `fundos` WHERE `Fundo` LIKE '%Equitas%'")
 #css
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
